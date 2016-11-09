@@ -1,0 +1,10 @@
+---
+# This is the main playbook what ansible will use for provisoning. 
+- hosts: build-systems
+  become: yes
+  become_method: sudo
+  serial: 1
+  roles:
+    - utils-tools
+    - cs-docker-engine
+    - build-system

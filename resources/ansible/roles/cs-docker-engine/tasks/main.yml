@@ -1,0 +1,28 @@
+---
+- name: addkey
+  rpm_key: state=present key='https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e'
+
+- name: Add repository.
+  yum_repository:
+    name: dockerrepos
+    description: EPEL YUM repo
+    baseurl: https://packages.docker.com/1.12/yum/repo/main/centos/7
+ 
+- name: Add repository.
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
+    
+
+- name: Install docker engine.
+  yum: name=docker-engine state=present
+  
+- name: Install python-pip
+  yum: name=python-pip state=present
+  
+- name: Install docker-py
+  pip: name=docker-py
+
+- name: Add docker group
+  user: name=vagrant group=docker
+  
+- name: Start docker service
+  service: name=docker enabled=yes state=started
