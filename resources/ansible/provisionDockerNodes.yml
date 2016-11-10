@@ -1,9 +1,8 @@
 ---
 # This is the main playbook what ansible will use for provisoning. 
-- hosts: docker-ucp-nodes
+- hosts: docker-nodes
   become: yes
   become_method: sudo
   serial: 1
   roles:
     - cs-docker-engine
-    - docker-ucp-nodes
